@@ -311,7 +311,7 @@
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 110
+#define BED_MAXTEMP 115
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -364,7 +364,8 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-//#define PIDTEMPBED
+
+#define PIDTEMPBED  // MAXI: Estaba desactivado
 
 //#define BED_LIMIT_SWITCHING
 
@@ -372,7 +373,7 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 255 // limits duty cycle to bed; 255=full current
+#define MAX_BED_POWER 205 // limits duty cycle to bed; 255=full current - MAXI: Originalmente estaba en 255
 
 #if ENABLED(PIDTEMPBED)
 
@@ -380,9 +381,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 10.00
-  #define  DEFAULT_bedKi .023
-  #define  DEFAULT_bedKd 305.4
+  #define  DEFAULT_bedKp 172.01 // MAXI: Originalmente estaba en 10.00 - Este PID fue realizado orientado a 100°C:  M303 C8 E-1 S100 -  
+  #define  DEFAULT_bedKi 33.87  // MAXI: Originalmente estaba en 0.023
+  #define  DEFAULT_bedKd 218.41 // MAXI: Originalmente estaba en 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -423,8 +424,8 @@
  * details can be tuned in Configuration_adv.h
  */
 
-#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders  - MAXI: Protección por si se desconectan los termistores
+#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed - MAXI: Protección por si se desconectan los termistores 
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -990,7 +991,7 @@
 // M501 - reads parameters from EEPROM (if you need reset them after you changed them temporarily).
 // M502 - reverts to the default "factory settings".  You still need to store them in EEPROM afterwards if you want to.
 //
-//#define EEPROM_SETTINGS // Enable for M500 and M501 commands
+#define EEPROM_SETTINGS // Enable for M500 and M501 commands - MAXI: Esto estaba desactivado
 //#define DISABLE_M503    // Saves ~2700 bytes of PROGMEM. Disable for release!
 #define EEPROM_CHITCHAT   // Give feedback on EEPROM commands. Disable to save PROGMEM.
 
