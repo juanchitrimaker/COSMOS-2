@@ -80,10 +80,14 @@
 
 /**
  * Thermal Protection parameters for the bed are just as above for hotends.
+ * 
+ * Si la temperatura llegó al objetivo, se queda observando si la misma está mas abajo de THERMAL_PROTECTION_BED_HYSTERESIS
+ * por un período superior a THERMAL_PROTECTION_BED_PERIOD
+ * 
  */
 #if ENABLED(THERMAL_PROTECTION_BED)
-  #define THERMAL_PROTECTION_BED_PERIOD 60    // Seconds - MAXI: Estaba originalmente en 20
-  #define THERMAL_PROTECTION_BED_HYSTERESIS 2 // Degrees Celsius - MAXI: Estaba originalmente en 2
+  #define THERMAL_PROTECTION_BED_PERIOD 90  // Seconds - MAXI: Estaba originalmente en 20
+  #define THERMAL_PROTECTION_BED_HYSTERESIS 8 // Degrees Celsius - MAXI: Estaba originalmente en 2
 
   /**
    * Whenever an M140 or M190 increases the target temperature the firmware will wait for the
@@ -93,8 +97,12 @@
    *
    * If you get too many "Heating failed" errors, increase WATCH_BED_TEMP_PERIOD and/or decrease
    * WATCH_BED_TEMP_INCREASE. (WATCH_BED_TEMP_INCREASE should not be below 2.)
+   * 
+   * Mientras está calentando, se fija si aumenta al menos 2 grados cada 60 segundos. Si en 60 segundos
+   * no se aumentaron al menos 2 grados entonces corta.
+   * 
    */
-  #define WATCH_BED_TEMP_PERIOD 60                // Seconds
+  #define WATCH_BED_TEMP_PERIOD 90                // Seconds
   #define WATCH_BED_TEMP_INCREASE 2               // Degrees Celsius
 #endif
 

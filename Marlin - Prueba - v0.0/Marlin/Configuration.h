@@ -320,7 +320,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 230 // limits current to nozzle while in bang-bang mode; 255=full current - MAXI: Original estaba a 255.
 #define PID_MAX BANG_MAX // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #if ENABLED(PIDTEMP)
   //#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
@@ -367,7 +367,7 @@
 
 #define PIDTEMPBED  // MAXI: Estaba desactivado
 
-//#define BED_LIMIT_SWITCHING
+//#define BED_LIMIT_SWITCHING // MAXI: Estaba desactivado
 
 // This sets the max power delivered to the bed, and replaces the HEATER_BED_DUTY_CYCLE_DIVIDER option.
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
