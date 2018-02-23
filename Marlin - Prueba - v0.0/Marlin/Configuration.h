@@ -267,7 +267,7 @@
  *
  * :{ '0': "Not used", '1':"100k / 4.7k - EPCOS", '2':"200k / 4.7k - ATC Semitec 204GT-2", '3':"Mendel-parts / 4.7k", '4':"10k !! do not use for a hotend. Bad resolution at high temp. !!", '5':"100K / 4.7k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '6':"100k / 4.7k EPCOS - Not as accurate as Table 1", '7':"100k / 4.7k Honeywell 135-104LAG-J01", '8':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT", '9':"100k / 4.7k GE Sensing AL03006-58.2K-97-G1", '10':"100k / 4.7k RS 198-961", '11':"100k / 4.7k beta 3950 1%", '12':"100k / 4.7k 0603 SMD Vishay NTCS0603E3104FXT (calibrated for Makibox hot bed)", '13':"100k Hisens 3950  1% up to 300°C for hotend 'Simple ONE ' & hotend 'All In ONE'", '20':"PT100 (Ultimainboard V2.x)", '51':"100k / 1k - EPCOS", '52':"200k / 1k - ATC Semitec 204GT-2", '55':"100k / 1k - ATC Semitec 104GT-2 (Used in ParCan & J-Head)", '60':"100k Maker's Tool Works Kapton Bed Thermistor beta=3950", '66':"Dyze Design 4.7M High Temperature thermistor", '70':"the 100K thermistor found in the bq Hephestos 2", '71':"100k / 4.7k Honeywell 135-104LAF-J01", '147':"Pt100 / 4.7k", '1047':"Pt1000 / 4.7k", '110':"Pt100 / 1k (non-standard)", '1010':"Pt1000 / 1k (non standard)", '-3':"Thermocouple + MAX31855 (only for sensor 0)", '-2':"Thermocouple + MAX6675 (only for sensor 0)", '-1':"Thermocouple + AD595",'998':"Dummy 1", '999':"Dummy 2" }
  */
-#define TEMP_SENSOR_0 1
+#define TEMP_SENSOR_0 1      //Pruebo de ponerle la misma tabla que a la cama. En sí estaba en la opción 1
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
@@ -320,7 +320,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 230 // limits current to nozzle while in bang-bang mode; 255=full current - MAXI: Original estaba a 255.
+#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current - MAXI: Original estaba a 255. RULO: Maxi lo habia puesto a 230, lo pongo a 205 que es el 80%// RULO :Lo pongo al 95%
 #define PID_MAX BANG_MAX // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #if ENABLED(PIDTEMP)
   //#define PID_AUTOTUNE_MENU // Add PID Autotune to the LCD "Temperature" menu to run M303 and apply the result.
@@ -517,7 +517,7 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 150, 150, 5, 25 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -669,7 +669,7 @@
 // Y offset: -front +behind [the nozzle] 
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 0  
 // Z offset: -below +above  [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4    	//RULO:Distancia de la boquilla al sensor (Se modifica con la configuracion de offset de Z)
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0    	//RULO:Distancia de la boquilla al sensor (Se modifica con la configuracion de offset de Z)
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 8000
@@ -697,7 +697,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE 10 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 // For M851 give a range for adjusting the Z probe offset
@@ -765,10 +765,10 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS 200
 #define Y_MAX_POS 200
-#define Z_MAX_POS 200
+#define Z_MAX_POS 201
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
-//#define MIN_SOFTWARE_ENDSTOPS           //RULO: Lo comento para poder hacer la configuracion del offset de Z, sino no podría seguir subiendo (valores negativos) al llegar a Z=0                                              //RULO: La comento para poder a ir valores negativos en Z y poder hacer la "configuracion del offset del autoleving"
+#define MIN_SOFTWARE_ENDSTOPS                    //RULO: No hace falta comentarlo, lo manejo con el M211
 // If enabled, axes won't move above MAX_POS in response to movement commands.
 #define MAX_SOFTWARE_ENDSTOPS
 
@@ -858,10 +858,10 @@
 
   // Set the boundaries for probing (where the probe can reach).
   // RULO: Pongo estos valores para que tome los valores en los extremos y los centros de la cama
-  #define LEFT_PROBE_BED_POSITION 61.7
-  #define RIGHT_PROBE_BED_POSITION 200
-  #define FRONT_PROBE_BED_POSITION 0
-  #define BACK_PROBE_BED_POSITION 200
+  #define LEFT_PROBE_BED_POSITION 91.7      //Le agrego 30 mm para que tome los puntos en la cama caliente
+  #define RIGHT_PROBE_BED_POSITION 195
+  #define FRONT_PROBE_BED_POSITION 30       // Para que tome los puntos en la cama caliente
+  #define BACK_PROBE_BED_POSITION 195
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE 10

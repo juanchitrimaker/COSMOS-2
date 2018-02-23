@@ -7191,8 +7191,8 @@ inline void gcode_M105() {
    *  P<index> Fan index, if more than one fan
    */
   inline void gcode_M106() {
-    uint16_t s = parser.ushortval('S', 255);
-    NOMORE(s, 255);
+    uint16_t s = parser.ushortval('S', 127); //RULO:Pongo a la mitad el fan
+    NOMORE(s, 127);
     const uint8_t p = parser.byteval('P', 0);
     if (p < FAN_COUNT) fanSpeeds[p] = s;
   }
