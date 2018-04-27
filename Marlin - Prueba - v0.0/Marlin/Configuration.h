@@ -306,7 +306,7 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 250
+#define HEATER_0_MAXTEMP 260
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
@@ -336,9 +336,9 @@
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
   // Ultimaker
-  #define  DEFAULT_Kp 22.2
-  #define  DEFAULT_Ki 1.08
-  #define  DEFAULT_Kd 114
+  #define  DEFAULT_Kp 18.18 // RULO: original Ultimaker: 22.2
+  #define  DEFAULT_Ki 1.33  //RULO: original Ultimaker 1.08
+  #define  DEFAULT_Kd 62.18 // RULO: original Ultimaker 114
 
   // MakerGear
   //#define  DEFAULT_Kp 7.0
@@ -381,9 +381,9 @@
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define  DEFAULT_bedKp 172.01 // MAXI: Originalmente estaba en 10.00 - Este PID fue realizado orientado a 100°C:  M303 C8 E-1 S100 -  
-  #define  DEFAULT_bedKi 33.87  // MAXI: Originalmente estaba en 0.023
-  #define  DEFAULT_bedKd 218.41 // MAXI: Originalmente estaba en 305.4
+  #define  DEFAULT_bedKp 165.56 //RULO: Cambio valores que puso maxi: 172.01 // MAXI: Originalmente estaba en 10.00 - Este PID fue realizado orientado a 100°C:  M303 C8 E-1 S100 -  
+  #define  DEFAULT_bedKi 32,59 //RULO: Cambio valores que puso maxi:33.87  // MAXI: Originalmente estaba en 0.023
+  #define  DEFAULT_bedKd 210,24 //RULO: Cambio valores que puso maxi:218.41 // MAXI: Originalmente estaba en 305.4
 
   //120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   //from pidautotune
@@ -510,7 +510,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 80.22 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 1600, 90}  //RULO: Cosmos I Pxmm E= 86.6 en original que viene en Marlin 80.22
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -697,7 +697,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE 10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE 5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 // For M851 give a range for adjusting the Z probe offset
