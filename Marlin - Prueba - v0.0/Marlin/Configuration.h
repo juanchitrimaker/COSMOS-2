@@ -373,7 +373,7 @@
 // all forms of bed control obey this (PID, bang-bang, bang-bang with hysteresis)
 // setting this to anything other than 255 enables a form of PWM to the bed just like HEATER_BED_DUTY_CYCLE_DIVIDER did,
 // so you shouldn't use it unless you are OK with PWM on your bed.  (see the comment on enabling PIDTEMPBED)
-#define MAX_BED_POWER 205 // limits duty cycle to bed; 255=full current - MAXI: Originalmente estaba en 255
+#define MAX_BED_POWER 230 // limits duty cycle to bed; 255=full current - MAXI: Originalmente estaba en 255 RULO: Estaba al 80% lo pongo al 90%
 
 #if ENABLED(PIDTEMPBED)
 
